@@ -17,12 +17,20 @@ public class ReactiveTarget : MonoBehaviour
     }
 
     public void ReactToHit(){
-        StartCoroutine(Die());
+        WanderingAI behaviour = GetComponent<WanderingAI>();
+
+        if(behaviour != null){
+            if(behaviour.Alive||behaviour.Hurt){
+                behaviour.Hit();
+            }
+            if(behaviour.Dead)
+                StartCoroutine(Die());
+        }
+
     }
 
     private IEnumerator Die(){
         
-        this.transform.Rotate(-75, 0, 0);
         yield return new WaitForSeconds(1.5F);
         Destroy(this.gameObject);
     }

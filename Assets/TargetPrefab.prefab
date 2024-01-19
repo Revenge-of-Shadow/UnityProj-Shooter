@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7113882911732451445}
   - component: {fileID: 6877051944254835508}
   - component: {fileID: 3573897796235011130}
-  - component: {fileID: 6174483314852921432}
+  - component: {fileID: 421386982426939670}
   m_Layer: 0
   m_Name: TargetPrefab
   m_TagString: Untagged
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90be8fd723e4ccde7850856b0f5a6942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6174483314852921432
+--- !u!114 &421386982426939670
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,11 +130,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1798029626532015656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a4b2777bf09527cb7021505d28871d, type: 3}
+  m_Script: {fileID: 11500000, guid: bdec993c659c83ddd97cd302a5f75dba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 160
-  frame: 0
+  normal_speed: 32
+  hurt_speed: 16
+  speed: 32
+  obstacleRange: 48
+  HP: 10
+  state: 0
 --- !u!1 &3202146479404318738
 GameObject:
   m_ObjectHideFlags: 0
