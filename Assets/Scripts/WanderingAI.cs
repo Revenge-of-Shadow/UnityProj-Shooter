@@ -18,6 +18,11 @@ public class WanderingAI : MonoBehaviour
     private float obstacleRange = 48.0F;    //  Keep it bigger than speed to avoid... inconveniences.
     [SerializeField]
     private float HP = 10.0F;
+
+    [SerializeField]
+    private int frame = 0;
+
+
     [System.Flags]
     public enum State {dead = 0, alive = 1, hit = 2, searching = 4};
     [SerializeField]
@@ -46,15 +51,20 @@ public class WanderingAI : MonoBehaviour
         if(!Dead){
             
             if(Searching){
+                if(++frame >= 360){
+                    frame = 0;
+                    StopSearch();
+                }
+
                 Search();
             }else{
                 transform.Translate(0, 0, speed*Time.deltaTime);
-                //  Add timer
-                StartSearch();
+
+                if(++frame >= 100){
+                    frame = 0;
+                    StartSearch();
+                }
             }
-
-
-
         }
     }
 
@@ -88,9 +98,12 @@ public class WanderingAI : MonoBehaviour
     public void StartSearch(){
         this.state |= State.searching;
     }
+    public void StopSearch(){
+        this.state = state & ~State.searching;
+    }
     public void Search(){
         if(CastRay())
-            state = state & ~State.searching;
+            StopSearch();
         else
             transform.Rotate(0, 1, 0);
     }
