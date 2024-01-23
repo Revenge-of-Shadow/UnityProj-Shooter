@@ -27,7 +27,7 @@ public class RayShooter : MonoBehaviour
             if(Physics.Raycast(ray, out hit)){
                 //Debug.Log(String.Format("Hit {0}", hit.point));
 
-                StartCoroutine(SphereIndicator(hit.point));
+                Debug.DrawRay(ray.origin, ray.direction, Color.red, 1.0F);
 
                 GameObject hitObject = hit.transform.gameObject;
                 ReactiveTarget target = hitObject.GetComponent<ReactiveTarget>();
@@ -36,19 +36,18 @@ public class RayShooter : MonoBehaviour
                     target.ReactToHit();
                 }
                 else{
-                    StartCoroutine(SphereIndicator(hit.point));
                 }
             }
         }
     }
 
-    private IEnumerator SphereIndicator(Vector3 pos){
+    private IEnumerator CylinderIndicator(Vector3 pos){
         
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Quad);
-        sphere.transform.position = pos;
-        sphere.transform.rotation = this.transform.rotation;
+        GameObject cylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+        cylinder.transform.position = pos;
+        cylinder.transform.rotation = this.transform.rotation;
         yield return new WaitForSeconds(0.05F);
-        Destroy(sphere);
+        Destroy(cylinder);
     }
 
     void OnGUI(){

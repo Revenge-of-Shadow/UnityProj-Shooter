@@ -14,8 +14,8 @@ public class MouseLook : MonoBehaviour
     public float senseHorizontal = 20.0F;
     public float senseVertical = 20.0F;
 
-    public float maxVertAngle = 45.0F;
-    public float minVertAngle = -45.0F;
+    public float maxVertAngle = 60.0F;
+    public float minVertAngle = -60.0F;
     public float vertAngle = 0.0F;
 
     // Start is called before the first frame update

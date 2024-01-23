@@ -20,7 +20,7 @@ public class ReactiveTarget : MonoBehaviour
         WanderingAI behaviour = GetComponent<WanderingAI>();
 
         if(behaviour != null){
-            if(behaviour.Alive||behaviour.Hurt){
+            if(behaviour.Alive){
                 behaviour.Hit();
             }
             if(behaviour.Dead)
