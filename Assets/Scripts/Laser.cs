@@ -8,8 +8,13 @@ public class Laser : MonoBehaviour
     private float speed = 160F;
     [SerializeField]
     private int damage = 1;
-    // Start is called before 
-    // Start is called before the first frame update
+    [SerializeField]
+    private int frame = 0;
+    
+    //  Last frame before suicide.
+    [SerializeField]
+    private int lifespan = 0;
+
     void Start()
     {
         
@@ -19,6 +24,9 @@ public class Laser : MonoBehaviour
     void Update()
     {
         transform.Translate(0, 0, speed* Time.deltaTime);
+
+        if(++frame == 512)
+            Destroy(this.gameObject);
     }
 
     void OnTriggerEnter(Collider other){
@@ -27,6 +35,7 @@ public class Laser : MonoBehaviour
         {
             player.Hit();
         }
-        Destroy(this.gameObject);
+        else if(!other.GetComponent<WanderingAI>())
+            Destroy(this.gameObject);
     }
 }

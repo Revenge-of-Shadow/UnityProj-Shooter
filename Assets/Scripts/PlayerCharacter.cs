@@ -6,6 +6,8 @@ using System;
 public class PlayerCharacter : MonoBehaviour
 {
     [SerializeField]
+    public const float maxHP = 10.0F;
+    [SerializeField]
     private float HP = 10.0F;
     [System.Flags]
     public enum State {dead = 0, alive = 1, hit = 2, searching = 4};
@@ -16,7 +18,9 @@ public class PlayerCharacter : MonoBehaviour
     public bool Alive{get {return state==State.alive;}}
     public bool Dead{get {return state==State.dead;}}
     public bool Hurt{get {return state==State.hit;}}
-    public float getHP{get {return HP;}}    
+    public float getHP{get {return HP;}}
+
+    public static global::System.Single MaxHP => maxHP;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,7 @@ public class PlayerCharacter : MonoBehaviour
     }
     public void Live(){
         this.state = State.alive;
+        this.HP = maxHP;
     }
     public void Hit(){
         setHP(getHP-1);

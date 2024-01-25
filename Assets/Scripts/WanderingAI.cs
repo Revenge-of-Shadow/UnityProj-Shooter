@@ -17,6 +17,8 @@ public class WanderingAI : MonoBehaviour
     [SerializeField]
     private float obstacleRange = 48.0F;    //  Keep it bigger than speed to avoid... inconveniences.
     [SerializeField]
+    public const float maxHP = 10.0F;
+    [SerializeField]
     private float HP = 10.0F;
 
     [SerializeField]
@@ -78,7 +80,8 @@ public class WanderingAI : MonoBehaviour
     }
     public void Live(){
         this.state = State.alive;
-        speed = normal_speed;
+        this.speed = this.normal_speed;
+        this.HP = maxHP;
     }
     public void Hit(){
         setHP(getHP-1);
@@ -115,14 +118,14 @@ public class WanderingAI : MonoBehaviour
            Ray ray = new Ray(transform.position, transform.forward);
            RaycastHit hit;
 
-           if(Physics.SphereCast(ray, 0.75F, out hit))
+           if(Physics.SphereCast(ray, 0.1F, out hit))
             {
                 GameObject hitobject = hit.transform.gameObject;
-
+                Debug.Log(hitobject);
                 if(hitobject.GetComponent<PlayerCharacter>()){
                     if(_fireball == null){
                         _fireball = Instantiate(fireballPrefab);
-                        _fireball.transform.position = transform.TransformPoint(Vector3.forward * 1.5F);
+                        _fireball.transform.position = transform.TransformPoint(Vector3.forward * 5F);
                         _fireball.transform.rotation = transform.rotation;
                         result = true;
                     }
