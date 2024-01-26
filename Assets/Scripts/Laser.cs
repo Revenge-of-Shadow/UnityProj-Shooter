@@ -5,7 +5,7 @@ using UnityEngine;
 public class Laser : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 160F;
+    private float speed = 320F;
     [SerializeField]
     private int damage = 1;
     [SerializeField]
@@ -13,7 +13,7 @@ public class Laser : MonoBehaviour
     
     //  Last frame before suicide.
     [SerializeField]
-    private int lifespan = 0;
+    private int lifespan = 128;
 
     void Start()
     {
@@ -25,17 +25,31 @@ public class Laser : MonoBehaviour
     {
         transform.Translate(0, 0, speed* Time.deltaTime);
 
-        if(++frame == 512)
+        if(++frame >= lifespan)
             Destroy(this.gameObject);
     }
 
     void OnTriggerEnter(Collider other){
         PlayerCharacter player = other.GetComponent<PlayerCharacter>();
+        ReactiveTarget target = other.GetComponent<ReactiveTarget>();
+        
         if(player)
         {
             player.Hit();
         }
-        else if(!other.GetComponent<WanderingAI>())
-            Destroy(this.gameObject);
+        else if(target){
+            target.ReactToHit();
+            if(transform.parent){
+                player = transform.parent.parent.gameObject.GetComponent<PlayerCharacter>();
+                if(player){
+                    int scor = other.GetComponent<WanderingAI>().Dead? 100 : 10;
+
+                    player.setScore(player.getScore + scor);
+                }
+            }
+        }
+
+        Destroy(this.gameObject);
+
     }
 }

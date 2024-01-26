@@ -55,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 3.5, z: 5}
-  m_Center: {x: 0, y: -0.2, z: 0}
+  m_Size: {x: 5, y: 3.8, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-6381094767066722994
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67,7 +67,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 100
   m_Drag: 0.5
-  m_AngularDrag: 1
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -100,7 +100,7 @@ MonoBehaviour:
   hurt_speed: 8
   speed: 16
   obstacleRange: 48
-  HP: 10
+  HP: 0
   frame: 0
   state: 0
   fireballPrefab: {fileID: 3940314601252674661, guid: 2d57789fa61aa2b2cb34c14cf3f2d622, type: 3}

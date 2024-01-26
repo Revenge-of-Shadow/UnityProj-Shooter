@@ -34,8 +34,7 @@ public class SceneControlelr : MonoBehaviour
         for(int i = 0; i < targets.Count; ++i){
             if(targets[i]==null){
                 targets[i] = Instantiate(_targetPrefab) as GameObject;
-                targets[i].transform.position = new Vector3(_rnd.Next(-randRange, randRange), 80, _rnd.Next(-randRange, randRange));
-                //targets[i].transform.position = new Vector3(0, 70, 0);
+                targets[i].transform.position = new Vector3(_rnd.Next(-randRange, randRange), 100, _rnd.Next(-randRange, randRange));
             }
         }
 

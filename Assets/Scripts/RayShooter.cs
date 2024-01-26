@@ -5,6 +5,18 @@ using System;
 
 public class RayShooter : MonoBehaviour
 {
+
+    //  Delay in frames;
+    [SerializeField]
+    private int shootingDelay = 0;
+    [SerializeField]
+    private int maxShootingDelay = 32;
+
+    [SerializeField]
+    private GameObject fireballPrefab;
+
+    private GameObject _fireball;
+
     Camera _camera;
     // Start is called before the first frame update
     void Start()
@@ -18,8 +30,10 @@ public class RayShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(shootingDelay > 0)   --shootingDelay;
+
         if(Input.GetMouseButton(0)){
-            
+            /*
             Vector3 point = new Vector3(_camera.pixelWidth/2.0F, _camera.pixelHeight/2.0F, -_camera.pixelWidth);
             
             Ray ray = _camera.ScreenPointToRay(point);  //  Geometrical ray.
@@ -38,6 +52,14 @@ public class RayShooter : MonoBehaviour
                 else{
                 }
             }
+            */
+            if(shootingDelay == 0){
+                _fireball = Instantiate(fireballPrefab);
+                _fireball.transform.position = transform.TransformPoint(Vector3.forward * 5F);
+                _fireball.transform.rotation = transform.rotation;
+                _fireball.transform.parent = this.transform;
+                shootingDelay = maxShootingDelay;
+            }
         }
     }
 
@@ -51,11 +73,24 @@ public class RayShooter : MonoBehaviour
     }
 
     void OnGUI(){
-        float size = 24;
+        GUI.contentColor = Color.black;
+        GUI.skin.label.fontSize = 20;
+        float size = 48;
         float posX = _camera.pixelWidth/2.0F - size/8.0F;
-        float posY = _camera.pixelHeight/2.0F - size/2.0F;
+        float posY = _camera.pixelHeight/2.0F - size/3.0F;
         //float posZ = -_camera.pixelWidth;
 
         GUI.Label(new Rect(posX, posY, size, size), "+");
+
+        string datastr = "Health: "
+            +transform.parent.gameObject.GetComponent<PlayerCharacter>().getHP
+            +"/"
+            +PlayerCharacter.maxHP
+            +"   Reload time left: " 
+            + shootingDelay
+            +"  Score: "
+            +transform.parent.gameObject.GetComponent<PlayerCharacter>().getScore;
+        GUI.Label(new Rect(0, _camera.pixelHeight-size/2.0F, size*16, size), datastr);
+
     }
 }
