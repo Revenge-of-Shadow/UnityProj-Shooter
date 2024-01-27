@@ -73,7 +73,7 @@ public class RayShooter : MonoBehaviour
     }
 
     void OnGUI(){
-        GUI.contentColor = Color.black;
+        GUI.contentColor = Color.red;
         GUI.skin.label.fontSize = 20;
         float size = 48;
         float posX = _camera.pixelWidth/2.0F - size/8.0F;
